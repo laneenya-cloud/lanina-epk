@@ -1,0 +1,832 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LA NIÑA — Electronic Press Kit</title>
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Familjen+Grotesk:ital,wght@0,400;0,500;0,700;1,400&family=Share+Tech+Mono&display=swap" rel="stylesheet" />
+  <style>
+
+    /* ══════════════════════════════════════════
+       DARK MODE (default)
+    ══════════════════════════════════════════ */
+    :root,
+    [data-theme="dark"] {
+      --bg:          #060606;
+      --bg-nav:      rgba(6,6,6,0.93);
+      --surface:     #0e0e0e;
+      --surface2:    #141414;
+      --border:      #1e1e1e;
+      --border2:     #2a2a2a;
+      --cyan:        #00E5CC;
+      --cyan-dim:    rgba(0,229,204,0.25);
+      --cyan-glow:   rgba(0,229,204,0.06);
+      --pink:        #FF2D6B;
+      --heading:     #EEEAE4;
+      --body-text:   #aaaaaa;
+      --mid:         #888;
+      --dim:         #555;
+      --muted:       #666;
+      --toggle-bg:   #1a1a1a;
+      --toggle-icon: #888;
+      --hero-grad:   linear-gradient(to bottom, rgba(6,6,6,0.3) 0%, rgba(6,6,6,0.1) 40%, rgba(6,6,6,0.85) 80%, rgba(6,6,6,1) 100%);
+      --wave-fade:   linear-gradient(90deg, rgba(6,6,6,0.7) 0%, transparent 20%, transparent 80%, rgba(6,6,6,0.7) 100%);
+      --cover-filter: brightness(0.35) saturate(0.8);
+      --qr-bg:       060606;
+      --qr-fg:       00E5CC;
+    }
+
+    /* ══════════════════════════════════════════
+       LIGHT MODE
+    ══════════════════════════════════════════ */
+    [data-theme="light"] {
+      --bg:          #F5F2EE;
+      --bg-nav:      rgba(245,242,238,0.95);
+      --surface:     #EDEAE5;
+      --surface2:    #E4E1DC;
+      --border:      #D5D0C8;
+      --border2:     #C5BFB5;
+      --cyan:        #007A6E;
+      --cyan-dim:    rgba(0,122,110,0.2);
+      --cyan-glow:   rgba(0,122,110,0.05);
+      --pink:        #C4003F;
+      --heading:     #111111;
+      --body-text:   #444444;
+      --mid:         #555555;
+      --dim:         #888888;
+      --muted:       #777777;
+      --toggle-bg:   #E0DDD8;
+      --toggle-icon: #555;
+      --hero-grad:   linear-gradient(to bottom, rgba(245,242,238,0.2) 0%, rgba(245,242,238,0.05) 40%, rgba(245,242,238,0.88) 80%, rgba(245,242,238,1) 100%);
+      --wave-fade:   linear-gradient(90deg, rgba(245,242,238,0.7) 0%, transparent 20%, transparent 80%, rgba(245,242,238,0.7) 100%);
+      --cover-filter: brightness(0.55) saturate(0.6);
+      --qr-bg:       F5F2EE;
+      --qr-fg:       007A6E;
+    }
+
+    *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+
+    body {
+      background: var(--bg);
+      color: var(--heading);
+      font-family: 'Familjen Grotesk', sans-serif;
+      font-weight: 400;
+      overflow-x: hidden;
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body::before {
+      content: '';
+      position: fixed; inset: 0;
+      background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.045'/%3E%3C/svg%3E");
+      pointer-events: none; z-index: 9999; opacity: 0.35;
+    }
+
+    /* ── ANIMATIONS ── */
+    @keyframes fadeUp   { from { opacity:0; transform:translateY(24px); } to { opacity:1; transform:translateY(0); } }
+    @keyframes fadeIn   { from { opacity:0; } to { opacity:1; } }
+    @keyframes ticker   { 0% { transform:translateX(0); } 100% { transform:translateX(-50%); } }
+    @keyframes glitch {
+      0%,88%,100% { clip-path:none; transform:translate(0); color:var(--heading); }
+      89% { clip-path:polygon(0 15%,100% 15%,100% 45%,0 45%); transform:translate(-3px,0); color:var(--cyan); }
+      91% { clip-path:polygon(0 60%,100% 60%,100% 80%,0 80%); transform:translate(3px,0); color:var(--pink); }
+      93% { clip-path:none; transform:translate(0); color:var(--heading); }
+    }
+    @keyframes glow {
+      0%,100% { text-shadow:0 0 12px rgba(0,229,204,0.25); }
+      50%      { text-shadow:0 0 28px rgba(0,229,204,0.5), 0 0 50px rgba(0,229,204,0.1); }
+    }
+    @keyframes barPulse { 0%,100% { transform:scaleY(1); } 50% { transform:scaleY(0.4); } }
+    @keyframes lightboxIn { from { opacity:0; transform:scale(0.94); } to { opacity:1; transform:scale(1); } }
+
+    /* ── THEME TOGGLE ── */
+    .theme-toggle {
+      background: var(--toggle-bg);
+      border: 1px solid var(--border2);
+      color: var(--toggle-icon);
+      cursor: pointer;
+      width: 34px; height: 34px;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.9rem;
+      transition: all 0.2s;
+      flex-shrink: 0;
+    }
+    .theme-toggle:hover { border-color: var(--cyan); color: var(--cyan); }
+
+    /* ── NAV ── */
+    nav {
+      position: fixed; top: 0; left: 0; right: 0; z-index: 100;
+      display: flex; align-items: center; justify-content: space-between;
+      padding: 1.1rem 3rem;
+      background: var(--bg-nav);
+      border-bottom: 1px solid var(--border);
+      backdrop-filter: blur(8px);
+      transition: background 0.3s, border-color 0.3s;
+    }
+    .nav-left { display: flex; align-items: center; gap: 1rem; }
+    .nav-brand { font-family:'Bebas Neue',sans-serif; font-size:1.1rem; letter-spacing:0.3em; color:var(--cyan); text-decoration:none; animation:glow 4s ease-in-out infinite; }
+    .nav-links { display:flex; gap:2.5rem; list-style:none; }
+    .nav-links a { font-family:'Share Tech Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--mid); text-decoration:none; transition:color 0.15s; }
+    .nav-links a:hover { color:var(--heading); }
+    .nav-right { display: flex; align-items: center; gap: 1rem; }
+    .nav-cta { font-family:'Share Tech Mono',monospace; font-size:0.6rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--bg); background:var(--cyan); padding:0.5rem 1.2rem; text-decoration:none; transition:opacity 0.15s; }
+    .nav-cta:hover { opacity:0.8; }
+
+    /* ── HERO ── */
+    .hero { min-height:100vh; display:grid; grid-template-rows:1fr auto; padding-top:5.5rem; position:relative; overflow:hidden; }
+    .hero-cover {
+      position:absolute; inset:0; z-index:0;
+      background-image: url('https://i.postimg.cc/CBQBPnyB/1450447.jpg');
+      background-size:cover; background-position:center center;
+      filter: var(--cover-filter);
+      transition: filter 0.4s;
+      transform: translateZ(0);
+    }
+    .hero-cover-gradient { position:absolute; inset:0; z-index:1; background: var(--hero-grad); transition: background 0.3s; }
+    .hero-glow { position:absolute; inset:0; z-index:2; background: radial-gradient(ellipse 60% 40% at 35% 60%, var(--cyan-glow) 0%, transparent 60%); }
+    .hero-body { position:relative; z-index:10; display:flex; flex-direction:column; justify-content:flex-end; padding:0 3rem 2.5rem; }
+    .hero-kicker { font-family:'Share Tech Mono',monospace; font-size:0.62rem; letter-spacing:0.35em; text-transform:uppercase; color:var(--pink); margin-bottom:1rem; animation:fadeUp 0.6s 0.1s both; }
+    .hero-name { font-family:'Bebas Neue',sans-serif; font-size:clamp(6rem,17vw,14rem); line-height:0.88; letter-spacing:0.015em; color:var(--heading); animation:fadeUp 0.7s 0.05s both, glitch 10s 3s infinite; }
+    .hero-name span { color:var(--cyan); }
+    .hero-tagline { font-size:0.95rem; line-height:1.8; color:var(--body-text); max-width:540px; margin-top:1.5rem; animation:fadeUp 0.7s 0.2s both; }
+    .hero-actions { display:flex; gap:1rem; margin-top:2rem; animation:fadeUp 0.7s 0.3s both; }
+
+    .btn { font-family:'Share Tech Mono',monospace; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; padding:0.85rem 2rem; border:1px solid; text-decoration:none; transition:all 0.18s; cursor:pointer; display:inline-block; background:transparent; }
+    .btn-primary { border-color:var(--cyan); color:var(--cyan); }
+    .btn-primary:hover { background:var(--cyan); color:var(--bg); box-shadow:0 0 20px rgba(0,229,204,0.25); }
+    .btn-ghost { border-color:var(--cyan); color:var(--cyan); }
+    .btn-ghost:hover { background:var(--cyan); color:var(--bg); box-shadow:0 0 20px rgba(0,229,204,0.25); }
+
+    .hero-bar { position:relative; z-index:10; display:grid; grid-template-columns:1fr; border-top:1px solid var(--border); animation:fadeIn 1s 0.5s both; }
+    .hero-stat { padding:1.4rem 3rem; }
+    .hero-stat-val { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:0.05em; color:var(--heading); line-height:1; }
+    .hero-stat-key { font-family:'Share Tech Mono',monospace; font-size:0.52rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--muted); margin-top:0.25rem; }
+
+    /* ── TICKER ── */
+    .ticker { overflow:hidden; white-space:nowrap; border-bottom:1px solid var(--border); padding:0.65rem 0; background:var(--surface); transition:background 0.3s; }
+    .ticker-track { display:inline-block; animation:ticker 18s linear infinite; }
+    .ticker-track span { font-family:'Share Tech Mono',monospace; font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--mid); padding:0 2.5rem; }
+    .ticker-track .hi { color:var(--cyan); }
+
+    /* ── COMMON SECTION ── */
+    .section { padding:5.5rem 3rem; border-bottom:1px solid var(--border); transition:border-color 0.3s; }
+    .sec-label { font-family:'Share Tech Mono',monospace; font-size:0.75rem; letter-spacing:0.3em; text-transform:uppercase; color:var(--pink); margin-bottom:0.6rem; }
+    .sec-heading { font-family:'Bebas Neue',sans-serif; font-size:3.2rem; letter-spacing:0.04em; color:var(--heading); line-height:1; }
+    .sec-rule { width:48px; height:2px; background:var(--cyan); margin:1.5rem 0 3rem; }
+
+    /* ── BIO ── */
+    .bio-grid { display:grid; grid-template-columns:3fr 2fr; gap:5rem; align-items:start; }
+    .bio-copy { font-size:1rem; line-height:1.95; color:var(--body-text); }
+    .bio-copy p+p { margin-top:1.3rem; }
+    .bio-copy strong { color:var(--heading); font-weight:600; }
+    .bio-panel { display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); }
+    .bio-row { background:var(--surface); padding:1rem 1.25rem; transition:background 0.3s; }
+    .bio-row-key { font-family:'Share Tech Mono',monospace; font-size:0.52rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--cyan); margin-bottom:0.35rem; }
+    .bio-row-val { font-size:0.88rem; color:var(--heading); line-height:1.5; }
+    .award-pill { margin-top:1.5rem; padding:1.25rem; border:1px solid var(--cyan-dim); background:var(--cyan-glow); }
+    .award-pill-label { font-family:'Share Tech Mono',monospace; font-size:0.52rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--cyan); margin-bottom:0.75rem; }
+    .award-event { display:flex; flex-direction:column; gap:0.15rem; padding:0.6rem 0; border-bottom:1px solid var(--cyan-dim); }
+    .award-event:last-child { border-bottom:none; padding-bottom:0; }
+    .award-event-title { font-size:0.88rem; color:var(--heading); font-weight:600; line-height:1.3; }
+    .award-event-sub { font-size:0.75rem; color:var(--mid); }
+    .genre-tags { display:flex; flex-wrap:wrap; gap:0.5rem; margin-top:2rem; }
+    .genre-tag { font-family:'Share Tech Mono',monospace; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.35rem 0.8rem; border:1px solid var(--cyan-dim); color:var(--cyan); }
+
+    /* ── SHOWS ── */
+    .shows-list { display:flex; flex-direction:column; }
+    .show-row { display:grid; grid-template-columns:90px 1fr; align-items:center; gap:2rem; padding:1.5rem 3rem; border-bottom:1px solid var(--border); transition:background 0.15s; }
+    .show-row:hover { background:var(--surface); }
+    .show-date { font-family:'Share Tech Mono',monospace; font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--pink); line-height:1.6; }
+    .show-name { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:0.04em; color:var(--heading); line-height:1; }
+    .show-loc { font-family:'Share Tech Mono',monospace; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:0.3rem; }
+
+    /* ── MIXES ── */
+    .mixes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+    .mix-card { background:var(--surface); overflow:hidden; transition:background 0.18s; }
+    .mix-card:hover { background:var(--surface2); }
+    .mix-wave { height:90px; display:flex; align-items:center; gap:2px; justify-content:center; background:var(--bg); border-bottom:1px solid var(--border); overflow:hidden; position:relative; transition:background 0.3s; }
+    .mix-wave::after { content:''; position:absolute; inset:0; background: var(--wave-fade); }
+    .bar { width:2px; background:var(--cyan); border-radius:1px; transform-origin:bottom; }
+    .mix-info { padding:1.25rem; }
+    .mix-genre-lbl { font-family:'Share Tech Mono',monospace; font-size:0.52rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--pink); margin-bottom:0.4rem; }
+    .mix-title-lbl { font-family:'Bebas Neue',sans-serif; font-size:1.35rem; letter-spacing:0.04em; color:var(--heading); margin-bottom:0.75rem; }
+    .mix-cta { font-family:'Share Tech Mono',monospace; font-size:0.55rem; letter-spacing:0.18em; text-transform:uppercase; color:var(--cyan); text-decoration:none; display:inline-flex; align-items:center; gap:0.4rem; }
+    .mix-cta:hover { color:var(--heading); }
+    .mix-cta::after { content:'→'; transition:transform 0.18s; }
+    .mix-card:hover .mix-cta::after { transform:translateX(3px); }
+
+    /* ── GALLERY horizontal scroll ── */
+    .gallery-scroll-wrap {
+      position: relative;
+      overflow: hidden;
+      margin: 0 -3rem;
+      cursor: grab;
+      user-select: none;
+    }
+    .gallery-scroll-wrap:active { cursor: grabbing; }
+    .gallery-scroll-track {
+      display: flex;
+      gap: 4px;
+      overflow-x: scroll;
+      scroll-behavior: smooth;
+      scrollbar-width: none;
+      -ms-overflow-style: none;
+      padding: 0 3rem 0 3rem;
+      -webkit-overflow-scrolling: touch;
+    }
+    .gallery-scroll-track::-webkit-scrollbar { display: none; }
+    .gallery-item {
+      flex: 0 0 auto;
+      height: 600px;
+      width: auto;
+      overflow: hidden;
+      position: relative;
+      cursor: pointer;
+    }
+    .gallery-item img {
+      height: 100%;
+      width: auto;
+      min-width: 300px;
+      display: block;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      filter: none;
+      pointer-events: none;
+      image-rendering: auto;
+      -webkit-backface-visibility: hidden;
+      backface-visibility: hidden;
+    }
+    [data-theme="light"] .gallery-item img { filter: none; }
+    .gallery-item:hover img { transform: scale(1.03); }
+    .gallery-item-overlay { position:absolute; inset:0; background:rgba(0,229,204,0.07); opacity:0; transition:opacity 0.3s; pointer-events:none; }
+    [data-theme="light"] .gallery-item-overlay { background:rgba(0,122,110,0.08); }
+    .gallery-item:hover .gallery-item-overlay { opacity:1; }
+
+    /* fade edges */
+    .gallery-scroll-wrap::before,
+    .gallery-scroll-wrap::after {
+      content: '';
+      position: absolute; top: 0; bottom: 0; width: 80px; z-index: 2; pointer-events: none;
+    }
+    .gallery-scroll-wrap::before { left: 0; background: linear-gradient(to right, var(--bg), transparent); }
+    .gallery-scroll-wrap::after  { right: 0; background: linear-gradient(to left, var(--bg), transparent); }
+
+    /* scroll hint arrows */
+    .gallery-nav {
+      display: flex; gap: 0.75rem; margin-top: 1.5rem; justify-content: flex-end; padding-right: 3rem;
+    }
+    .gallery-nav-btn {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.9rem; color: var(--mid);
+      background: var(--surface); border: 1px solid var(--border2);
+      width: 36px; height: 36px; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      transition: all 0.15s;
+    }
+    .gallery-nav-btn:hover { color: var(--cyan); border-color: var(--cyan); }
+
+    /* ── LIGHTBOX ── */
+    .lightbox { display:none; position:fixed; inset:0; z-index:9000; background:rgba(6,6,6,0.97); align-items:center; justify-content:center; flex-direction:column; }
+    [data-theme="light"] .lightbox { background:rgba(20,18,16,0.97); }
+    .lightbox.open { display:flex; }
+    .lightbox-img { max-width:90vw; max-height:88vh; object-fit:contain; animation:lightboxIn 0.25s ease; border:1px solid var(--border2); }
+    .lightbox-close { position:absolute; top:1.5rem; right:2rem; font-family:'Share Tech Mono',monospace; font-size:0.7rem; letter-spacing:0.2em; color:#888; cursor:pointer; transition:color 0.15s; }
+    .lightbox-close:hover { color:#eee; }
+    .lightbox-nav { position:absolute; top:50%; transform:translateY(-50%); font-family:'Share Tech Mono',monospace; font-size:1.2rem; color:#666; cursor:pointer; transition:color 0.15s; padding:1rem 1.5rem; user-select:none; }
+    .lightbox-nav:hover { color:var(--cyan); }
+    .lightbox-prev { left:0; }
+    .lightbox-next { right:0; }
+    .lightbox-counter { position:absolute; bottom:1.5rem; font-family:'Share Tech Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; color:#555; }
+
+    /* ── QR ── */
+    .qr-section { padding:5.5rem 3rem; border-bottom:1px solid var(--border); display:grid; grid-template-columns:1fr 1fr; gap:5rem; align-items:center; transition:border-color 0.3s; }
+    .qr-wrap { display:flex; flex-direction:column; align-items:flex-start; gap:1.5rem; }
+    .qr-canvas-wrap { padding:1.5rem; background:var(--surface); border:1px solid var(--border2); display:inline-block; }
+    .qr-label { font-family:'Share Tech Mono',monospace; font-size:0.58rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--cyan); margin-top:0.5rem; }
+    .qr-sub { font-family:'Share Tech Mono',monospace; font-size:0.52rem; letter-spacing:0.15em; color:var(--dim); }
+    .qr-info-body { font-size:0.9rem; line-height:1.8; color:var(--body-text); max-width:380px; }
+    .qr-download { margin-top:1.5rem; font-family:'Share Tech Mono',monospace; font-size:0.58rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--cyan); cursor:pointer; background:none; border:1px solid var(--cyan-dim); padding:0.6rem 1.2rem; transition:all 0.15s; }
+    .qr-download:hover { background:var(--cyan-glow); }
+
+    /* ── LINKS ── */
+    .links-grid { display:grid; grid-template-columns:repeat(2,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
+    .link-card { background:var(--surface); padding:2rem 2.5rem; display:flex; align-items:center; justify-content:space-between; text-decoration:none; transition:background 0.18s; }
+    .link-card:hover { background:var(--surface2); }
+    .link-platform { font-family:'Share Tech Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--cyan); margin-bottom:0.5rem; }
+    .link-handle { font-family:'Bebas Neue',sans-serif; font-size:1.8rem; letter-spacing:0.04em; color:var(--heading); line-height:1; }
+    .link-sub { font-size:0.78rem; color:var(--muted); margin-top:0.3rem; }
+    .link-arrow { font-family:'Share Tech Mono',monospace; font-size:1rem; color:var(--border2); transition:color 0.18s, transform 0.18s; }
+    .link-card:hover .link-arrow { color:var(--cyan); transform:translateX(4px); }
+
+    /* ── CONTACT ── */
+    .contact-wrap { display:grid; grid-template-columns:1fr 1fr; }
+    .contact-left { padding:5.5rem 3rem; border-right:1px solid var(--border); background:var(--surface); transition:background 0.3s, border-color 0.3s; }
+    .contact-right { padding:5.5rem 3rem; }
+    .contact-heading { font-family:'Bebas Neue',sans-serif; font-size:clamp(3rem,7vw,6rem); line-height:0.9; color:var(--heading); margin-bottom:1.5rem; }
+    .contact-heading span { color:var(--cyan); }
+    .contact-body { font-size:0.9rem; line-height:1.8; color:var(--body-text); max-width:360px; margin-bottom:2.5rem; }
+    .form-group { display:flex; flex-direction:column; gap:0.4rem; margin-bottom:1.25rem; }
+    .form-label { font-family:'Share Tech Mono',monospace; font-size:0.55rem; letter-spacing:0.2em; text-transform:uppercase; color:var(--pink); }
+    .form-input, .form-textarea { background:var(--surface); border:1px solid var(--border2); color:var(--heading); font-family:'Familjen Grotesk',sans-serif; font-size:0.9rem; padding:0.75rem 1rem; outline:none; transition:border-color 0.15s, background 0.3s; width:100%; }
+    .form-input::placeholder, .form-textarea::placeholder { color:var(--muted); }
+    .form-input:focus, .form-textarea:focus { border-color:var(--cyan); }
+    .form-textarea { resize:vertical; min-height:100px; }
+    .form-submit { font-family:'Share Tech Mono',monospace; font-size:0.62rem; letter-spacing:0.2em; text-transform:uppercase; background:var(--cyan); color:var(--bg); border:none; padding:0.9rem 2.5rem; cursor:pointer; transition:opacity 0.15s; margin-top:0.5rem; width:100%; }
+    .form-submit:hover { opacity:0.85; }
+    .form-success { display:none; padding:1rem; border:1px solid var(--cyan); background:var(--cyan-glow); font-family:'Share Tech Mono',monospace; font-size:0.6rem; letter-spacing:0.15em; color:var(--cyan); text-align:center; }
+
+    /* ── FOOTER ── */
+    footer { padding:1.75rem 3rem; border-top:1px solid var(--border); display:flex; align-items:center; justify-content:space-between; transition:border-color 0.3s; }
+    .footer-brand { font-family:'Bebas Neue',sans-serif; font-size:1.05rem; letter-spacing:0.3em; color:var(--cyan); }
+    .footer-copy { font-family:'Share Tech Mono',monospace; font-size:0.52rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--dim); }
+
+    /* ── RESPONSIVE ── */
+    @media(max-width:900px){
+      nav { padding:1rem 1.5rem; }
+      .nav-links { display:none; }
+      .hero-body { padding:0 1.5rem 2rem; }
+      .hero-stat { padding:1.2rem 1.5rem; }
+      .section { padding:3.5rem 1.5rem; }
+      .bio-grid { grid-template-columns:1fr; gap:2.5rem; }
+      .show-row { padding-left:1.5rem; padding-right:1.5rem; }
+      .mixes-grid { grid-template-columns:1fr; }
+      .gallery-item { height: 380px; }
+      .qr-section { grid-template-columns:1fr; gap:2.5rem; }
+      .links-grid { grid-template-columns:1fr; }
+      .contact-wrap { grid-template-columns:1fr; }
+      .contact-left { border-right:none; border-bottom:1px solid var(--border); }
+      footer { flex-direction:column; gap:0.75rem; text-align:center; }
+    }
+    
+  </style>
+</head>
+<body>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightboxOutside(event)">
+  <div class="lightbox-close" onclick="closeLightbox()">[ CLOSE × ]</div>
+  <span class="lightbox-nav lightbox-prev" onclick="lightboxNav(-1)">‹</span>
+  <img class="lightbox-img" id="lightboxImg" src="" alt="" />
+  <span class="lightbox-nav lightbox-next" onclick="lightboxNav(1)">›</span>
+  <div class="lightbox-counter" id="lightboxCounter"></div>
+</div>
+
+<!-- NAV -->
+<nav>
+  <div class="nav-left">
+    <button class="theme-toggle" id="themeToggle" onclick="toggleTheme()" title="Toggle light/dark mode">☀</button>
+    <a href="#" class="nav-brand">LA NIÑA</a>
+  </div>
+  <ul class="nav-links">
+    <li><a href="#bio">Bio</a></li>
+    <li><a href="#shows">Shows</a></li>
+    <li><a href="#mixes">Mixes</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#links">Links</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <div class="nav-right">
+    <a href="#contact" class="nav-cta">Book</a>
+  </div>
+</nav>
+
+<!-- HERO -->
+<div class="hero">
+  <div class="hero-cover"></div>
+  <div class="hero-cover-gradient"></div>
+  <div class="hero-glow"></div>
+  <div class="hero-body">
+    <div class="hero-kicker">Electronic Press Kit</div>
+    <h1 class="hero-name">LA<br><span>NIÑA</span></h1>
+    <p class="hero-tagline">Tech-house, techno, melodic house and techno DJ shaped by NYC's electronic music scene.</p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn btn-primary">Book La Niña</a>
+      <a href="https://soundcloud.com/lanina_dj" target="_blank" class="btn btn-ghost">Listen on SoundCloud</a>
+    </div>
+  </div>
+  <div class="hero-bar">
+    <div class="hero-stat">
+      <div class="hero-stat-val">NYC</div>
+      <div class="hero-stat-key">Based in New York</div>
+    </div>
+  </div>
+</div>
+
+<!-- TICKER -->
+<div class="ticker">
+  <div class="ticker-track">
+    <span class="hi">TECH HOUSE</span><span>///</span>
+    <span class="hi">TECHNO</span><span>///</span>
+    <span class="hi">MELODIC HOUSE</span><span>///</span>
+    <span class="hi">MELODIC TECHNO</span><span>///</span>
+    <span>ELECTRONIC</span><span>///</span>
+    <span class="hi">TECH HOUSE</span><span>///</span>
+    <span class="hi">TECHNO</span><span>///</span>
+    <span class="hi">MELODIC HOUSE</span><span>///</span>
+    <span class="hi">MELODIC TECHNO</span><span>///</span>
+    <span>ELECTRONIC</span><span>///</span>
+  </div>
+</div>
+
+<!-- BIO -->
+<section class="section" id="bio">
+  <div class="sec-label">// 01 — About</div>
+  <h2 class="sec-heading">Bio</h2>
+  <div class="sec-rule"></div>
+  <div class="bio-grid">
+    <div>
+      <div class="bio-copy">
+        <p><strong>La Niña</strong> is a Taiwanese-American DJ based in New York whose passion for dance music grew from many nights spent exploring electronic shows across the city.</p>
+        <p>Her sound draws from a wide range of global influences. While her tastes continue to evolve, she gravitates toward <strong>tech-house, techno, melodic house, and melodic techno</strong>, crafting sets that blend emotion, rhythm, and edge.</p>
+        <p>Community is at the heart of La Niña's artistry. She was a contestant in Australia's renowned <strong>Your Shot DJ Competition</strong> during its first-ever US debut among 200 other NYC participants. The experience deepened her connection to New York's diverse electronic music scene, and the relationships she's built with fellow artists and fans remain central to her creative drive.</p>
+      </div>
+      <div class="genre-tags">
+        <span class="genre-tag">Tech House</span>
+        <span class="genre-tag">Techno</span>
+        <span class="genre-tag">Melodic House</span>
+        <span class="genre-tag">Melodic Techno</span>
+      </div>
+    </div>
+    <div>
+      <div class="bio-panel">
+        <div class="bio-row"><div class="bio-row-key">Based In</div><div class="bio-row-val">New York City, NY</div></div>
+        <div class="bio-row"><div class="bio-row-key">Genres</div><div class="bio-row-val">Tech House · Techno · Melodic House · Melodic Techno</div></div>
+        <div class="bio-row"><div class="bio-row-key">Set Formats</div><div class="bio-row-val">60 min · 90 min · Open-to-Close</div></div>
+        <div class="bio-row"><div class="bio-row-key">Available For</div><div class="bio-row-val">Clubs · Festivals · Pool Parties · Residencies · Brand Events</div></div>
+      </div>
+      <div class="award-pill">
+        <div class="award-pill-label">Featured Events</div>
+        <div class="award-event">
+          <div class="award-event-title">LYRA — Magic Hour Rooftop</div>
+          <div class="award-event-sub">New York City · April 2026</div>
+        </div>
+        <div class="award-event">
+          <div class="award-event-title">DELIRIUM</div>
+          <div class="award-event-sub">New York City · January 2026</div>
+        </div>
+        <div class="award-event">
+          <div class="award-event-title">Your Shot DJ Competition</div>
+          <div class="award-event-sub">Your Shot USA · NYC · November 2025</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SHOWS -->
+<section class="section" id="shows" style="padding-left:0;padding-right:0;">
+  <div style="padding:0 3rem;">
+    <div class="sec-label">// 02 — Live Events</div>
+    <h2 class="sec-heading">Shows</h2>
+    <div class="sec-rule"></div>
+  </div>
+  <div class="shows-list">
+    <div class="show-row"><div class="show-date">04.04<br>2026</div><div><div class="show-name">LYRA — Magic Hour Rooftop</div><div class="show-loc">New York City</div></div></div>
+    <div class="show-row"><div class="show-date">02.07<br>2026</div><div><div class="show-name">ARDENT</div><div class="show-loc">New York City</div></div></div>
+    <div class="show-row"><div class="show-date">01.22<br>2026</div><div><div class="show-name">DELIRIUM</div><div class="show-loc">New York City</div></div></div>
+    <div class="show-row"><div class="show-date">12.12<br>2025</div><div><div class="show-name">ARDENT — Noir Haus</div><div class="show-loc">New York City</div></div></div>
+    <div class="show-row"><div class="show-date">11.23<br>2025</div><div><div class="show-name">Your Shot USA NYC</div><div class="show-loc">New York City</div></div></div>
+    <div class="show-row"><div class="show-date">09.27<br>2025</div><div><div class="show-name">ARDENT — Noir Haus</div><div class="show-loc">New York City</div></div></div>
+  </div>
+</section>
+
+<!-- MIXES -->
+<section class="section" id="mixes">
+  <div class="sec-label">// 03 — Sound</div>
+  <h2 class="sec-heading">Mixes</h2>
+  <div class="sec-rule"></div>
+  <div class="mixes-grid">
+    <div class="mix-card">
+      <div class="mix-wave" id="w1"></div>
+      <div class="mix-info">
+        <div class="mix-genre-lbl">Tech House / Melodic</div>
+        <div class="mix-title-lbl">LIC Club Set 09.26.25</div>
+        <a href="https://soundcloud.com/lanina_dj/0000-club-set-lic-09-26-2025?si=d84b54d2e9774a09aa62b492e40174e3" target="_blank" class="mix-cta">Play on SoundCloud</a>
+      </div>
+    </div>
+    <div class="mix-card">
+      <div class="mix-wave" id="w2"></div>
+      <div class="mix-info">
+        <div class="mix-genre-lbl">Your Shot 2025</div>
+        <div class="mix-title-lbl">Your Shot 2025 Mix</div>
+        <a href="https://soundcloud.com/lanina_dj/2025-your-shot-set-11-23-25-elsewhere?si=55d3537a4312435cb8a77a86e28f3142" target="_blank" class="mix-cta">Play on SoundCloud</a>
+      </div>
+    </div>
+    <div class="mix-card">
+      <div class="mix-wave" id="w3"></div>
+      <div class="mix-info">
+        <div class="mix-genre-lbl">Radio</div>
+        <div class="mix-title-lbl">ARDENT Radio Episode #14</div>
+        <a href="https://soundcloud.com/lanina_dj" target="_blank" class="mix-cta">Play on SoundCloud</a>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- GALLERY -->
+<section class="section" id="gallery">
+  <div class="sec-label">// 04 — Gallery</div>
+  <h2 class="sec-heading">Gallery</h2>
+  <div class="sec-rule"></div>
+  <div class="gallery-scroll-wrap" id="galleryWrap">
+    <div class="gallery-scroll-track" id="galleryTrack">
+      <div class="gallery-item" onclick="openLightbox(0)"><img src="https://i.postimg.cc/CBQBPnyB/1450447.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(1)"><img src="https://i.postimg.cc/m11c0ZRV/1560852-3.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(2)"><img src="https://i.postimg.cc/R6FJLQYm/1450240.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(3)"><img src="https://i.postimg.cc/1VVgLRP7/1560907.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(4)"><img src="https://i.postimg.cc/Kkz3DrW2/1450261.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(5)"><img src="https://i.postimg.cc/kRRVkM9K/1560810.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(6)"><img src="https://i.postimg.cc/ygd3yXbw/1450277.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(7)"><img src="https://i.postimg.cc/PpRp3vGZ/1560612.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(8)"><img src="https://i.postimg.cc/8J5fmBY8/1450291.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(9)"><img src="https://i.postimg.cc/5QQHZ91v/1560801.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(10)"><img src="https://i.postimg.cc/G82TxJfr/1450299.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(11)"><img src="https://i.postimg.cc/cgbg9tq7/1560756.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(12)"><img src="https://i.postimg.cc/njPjR98x/1450311.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(13)"><img src="https://i.postimg.cc/zbcbtHmS/1560766.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(14)"><img src="https://i.postimg.cc/ygbgQ3qs/1450382.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(15)"><img src="https://i.postimg.cc/BPP8dZsK/1560798.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(16)"><img src="https://i.postimg.cc/34c4S0MJ/1450395.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(17)"><img src="https://i.postimg.cc/kRRVkM9c/1560825.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(18)"><img src="https://i.postimg.cc/34c4S0MN/1450402.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(19)"><img src="https://i.postimg.cc/1VVgLRPd/1560998.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(20)"><img src="https://i.postimg.cc/2bKbcLpq/1450417.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(21)"><img src="https://i.postimg.cc/Lggqr4Rb/1570083.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(22)"><img src="https://i.postimg.cc/HchcZ8GX/1450504.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(23)"><img src="https://i.postimg.cc/gLLwfcdC/IMG-0197(1).jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(24)"><img src="https://i.postimg.cc/6447D6tx/IMG-0200(1).jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(25)"><img src="https://i.postimg.cc/LhJZqDfh/IMG-0201.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(26)"><img src="https://i.postimg.cc/fkV03CXL/IMG-0215(1).jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(27)"><img src="https://i.postimg.cc/XXryZLFZ/IMG-0234.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(28)"><img src="https://i.postimg.cc/6T8G7cRv/IMG-0252.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(29)"><img src="https://i.postimg.cc/3WkDy1pm/IMG-0260.jpg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(30)"><img src="https://i.postimg.cc/MnScF8Lr/IMG-2328.avif" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(31)"><img src="https://i.postimg.cc/dhj7MxPM/IMG-2339.avif" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(32)"><img src="https://i.postimg.cc/3kFyMcMs/IMG-2361.avif" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(33)"><img src="https://i.postimg.cc/GTD2XMJf/IMG-9313.avif" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(34)"><img src="https://i.postimg.cc/PPmJZRqT/IMG-9401.avif" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(35)"><img src="https://i.postimg.cc/qz8qn57N/IMG-9413.avif" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+    </div>
+  </div>
+  <div class="gallery-nav">
+    <button class="gallery-nav-btn" onclick="galleryScroll(-1)">←</button>
+    <button class="gallery-nav-btn" onclick="galleryScroll(1)">→</button>
+  </div>
+</section>
+
+<!-- QR CODE -->
+<section class="qr-section" id="qr">
+  <div class="qr-wrap">
+    <div class="sec-label">// 05 — Share</div>
+    <div class="qr-canvas-wrap">
+      <canvas id="qrCanvas" width="200" height="200"></canvas>
+    </div>
+    <div class="qr-label">LA NIÑA EPK</div>
+    <div class="qr-sub">soundcloud.com/lanina_dj</div>
+    <button class="qr-download" onclick="downloadQR()">↓ Download QR Code</button>
+  </div>
+  <div class="qr-info">
+    <h2 class="sec-heading" style="margin-bottom:1rem;">Share This<br><span style="color:var(--cyan);">EPK</span></h2>
+  </div>
+</section>
+
+<!-- LINKS -->
+<section class="section" id="links">
+  <div class="sec-label">// 06 — Connect</div>
+  <h2 class="sec-heading">Links</h2>
+  <div class="sec-rule"></div>
+  <div class="links-grid">
+    <a href="https://soundcloud.com/lanina_dj" target="_blank" class="link-card"><div><div class="link-platform">SoundCloud</div><div class="link-handle">lanina_dj</div><div class="link-sub">soundcloud.com/lanina_dj</div></div><div class="link-arrow">→</div></a>
+    <a href="https://instagram.com/lanina_dj" target="_blank" class="link-card"><div><div class="link-platform">Instagram</div><div class="link-handle">@lanina_dj</div><div class="link-sub">instagram.com/lanina_dj</div></div><div class="link-arrow">→</div></a>
+    <a href="https://www.tiktok.com/@lanina_dj?_r=1&_t=ZP-94agvy2BxVe" target="_blank" class="link-card"><div><div class="link-platform">TikTok</div><div class="link-handle">@lanina_dj</div><div class="link-sub">tiktok.com/@lanina_dj</div></div><div class="link-arrow">→</div></a>
+    <a href="https://www.threads.com/@lanina_dj?igshid=NTc4MTIwNjQ2YQ==" target="_blank" class="link-card"><div><div class="link-platform">Threads</div><div class="link-handle">@lanina_dj</div><div class="link-sub">threads.com/@lanina_dj</div></div><div class="link-arrow">→</div></a>
+    <a href="#contact" class="link-card" style="grid-column:1/-1;"><div><div class="link-platform">Booking</div><div class="link-handle">Book La Niña</div><div class="link-sub">Send a booking inquiry</div></div><div class="link-arrow">→</div></a>
+  </div>
+</section>
+
+<!-- CONTACT -->
+<div class="contact-wrap" id="contact">
+  <div class="contact-left">
+    <div class="sec-label">// 07 — Booking</div>
+    <h2 class="contact-heading">Book<br><span>La Niña</span></h2>
+    <p class="contact-body">Available for club nights, festival stages, pool parties, brand activations, and private events. Fill out the form and I'll get back to you with rates, availability, and rider info.</p>
+    <div class="bio-panel" style="margin-top:auto;">
+      <div class="bio-row"><div class="bio-row-key">Based In</div><div class="bio-row-val">New York City — Available to book outside NYC</div></div>
+      <div class="bio-row"><div class="bio-row-key">Instagram</div><div class="bio-row-val">@lanina_dj</div></div>
+      <div class="bio-row"><div class="bio-row-key">Genres</div><div class="bio-row-val">Tech House · Techno · Melodic House · Melodic Techno</div></div>
+    </div>
+  </div>
+  <div class="contact-right">
+    <div class="sec-label" style="margin-bottom:1.5rem;">// Send a message</div>
+    <form id="bookingForm" onsubmit="handleSubmit(event)">
+      <div class="form-group"><label class="form-label">Your Name</label><input class="form-input" type="text" placeholder="Name / Company" required /></div>
+      <div class="form-group"><label class="form-label">Your Email</label><input class="form-input" type="email" placeholder="your@email.com" required /></div>
+      <div class="form-group"><label class="form-label">Event Type</label><input class="form-input" type="text" placeholder="Club night, festival, private event..." /></div>
+      <div class="form-group"><label class="form-label">Date & Venue</label><input class="form-input" type="text" placeholder="Approx date + location" /></div>
+      <div class="form-group"><label class="form-label">Message</label><textarea class="form-textarea" placeholder="Tell me more about the event, set length, any other details..."></textarea></div>
+      <button type="submit" class="form-submit">Send Inquiry →</button>
+    </form>
+    <div class="form-success" id="formSuccess">✓ &nbsp; MESSAGE SENT — I'll get back to you soon.</div>
+  </div>
+</div>
+
+<footer>
+  <div class="footer-brand">LA NIÑA</div>
+  <div class="footer-copy">EPK 2026 — LA NIÑA</div>
+  <div class="footer-copy">@lanina_dj</div>
+</footer>
+
+<script>
+  // ── Auto detect system theme on first load ──
+  (function() {
+    const saved = localStorage.getItem('lanina-theme');
+    const system = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
+    const theme = saved || system;
+    document.documentElement.setAttribute('data-theme', theme);
+    document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀' : '☾';
+  })();
+
+  function toggleTheme() {
+    const html = document.documentElement;
+    const current = html.getAttribute('data-theme');
+    const next = current === 'dark' ? 'light' : 'dark';
+    html.setAttribute('data-theme', next);
+    document.getElementById('themeToggle').textContent = next === 'dark' ? '☀' : '☾';
+    localStorage.setItem('lanina-theme', next);
+    renderQR();
+  }
+
+  // ── Waveforms ──
+  function buildWave(id) {
+    const el = document.getElementById(id);
+    if (!el) return;
+    for (let i = 0; i < 52; i++) {
+      const b = document.createElement('div');
+      b.className = 'bar';
+      b.style.height = (8 + Math.random() * 62) + 'px';
+      b.style.opacity = String(0.35 + Math.random() * 0.65);
+      b.style.animation = `barPulse ${(0.5 + Math.random() * 1.2).toFixed(2)}s ${(Math.random() * 1.5).toFixed(2)}s ease-in-out infinite`;
+      el.appendChild(b);
+    }
+  }
+  ['w1','w2','w3'].forEach(buildWave);
+
+  // ── Contact form ──
+  function handleSubmit(e) {
+    e.preventDefault();
+    const form = e.target;
+    const name    = form.querySelector('input[type="text"]').value;
+    const email   = form.querySelector('input[type="email"]').value;
+    const evtType = form.querySelectorAll('input[type="text"]')[1]?.value || '';
+    const dateVen = form.querySelectorAll('input[type="text"]')[2]?.value || '';
+    const message = form.querySelector('textarea').value;
+    const subject = encodeURIComponent(`Booking Inquiry from ${name}`);
+    const body    = encodeURIComponent(`Name: ${name}\nEmail: ${email}\nEvent Type: ${evtType}\nDate & Venue: ${dateVen}\n\nMessage:\n${message}`);
+    window.location.href = `mailto:laneenyadj@gmail.com?subject=${subject}&body=${body}`;
+    form.style.display = 'none';
+    document.getElementById('formSuccess').style.display = 'block';
+  }
+
+  // ── Lightbox ──
+  const galleryImages = [
+    'https://i.postimg.cc/CBQBPnyB/1450447.jpg',
+    'https://i.postimg.cc/m11c0ZRV/1560852-3.jpg',
+    'https://i.postimg.cc/R6FJLQYm/1450240.jpg',
+    'https://i.postimg.cc/1VVgLRP7/1560907.jpg',
+    'https://i.postimg.cc/Kkz3DrW2/1450261.jpg',
+    'https://i.postimg.cc/kRRVkM9K/1560810.jpg',
+    'https://i.postimg.cc/ygd3yXbw/1450277.jpg',
+    'https://i.postimg.cc/PpRp3vGZ/1560612.jpg',
+    'https://i.postimg.cc/8J5fmBY8/1450291.jpg',
+    'https://i.postimg.cc/5QQHZ91v/1560801.jpg',
+    'https://i.postimg.cc/G82TxJfr/1450299.jpg',
+    'https://i.postimg.cc/cgbg9tq7/1560756.jpg',
+    'https://i.postimg.cc/njPjR98x/1450311.jpg',
+    'https://i.postimg.cc/zbcbtHmS/1560766.jpg',
+    'https://i.postimg.cc/ygbgQ3qs/1450382.jpg',
+    'https://i.postimg.cc/BPP8dZsK/1560798.jpg',
+    'https://i.postimg.cc/34c4S0MJ/1450395.jpg',
+    'https://i.postimg.cc/kRRVkM9c/1560825.jpg',
+    'https://i.postimg.cc/34c4S0MN/1450402.jpg',
+    'https://i.postimg.cc/1VVgLRPd/1560998.jpg',
+    'https://i.postimg.cc/2bKbcLpq/1450417.jpg',
+    'https://i.postimg.cc/Lggqr4Rb/1570083.jpg',
+    'https://i.postimg.cc/HchcZ8GX/1450504.jpg',
+    'https://i.postimg.cc/gLLwfcdC/IMG-0197(1).jpg',
+    'https://i.postimg.cc/6447D6tx/IMG-0200(1).jpg',
+    'https://i.postimg.cc/LhJZqDfh/IMG-0201.jpg',
+    'https://i.postimg.cc/fkV03CXL/IMG-0215(1).jpg',
+    'https://i.postimg.cc/XXryZLFZ/IMG-0234.jpg',
+    'https://i.postimg.cc/6T8G7cRv/IMG-0252.jpg',
+    'https://i.postimg.cc/3WkDy1pm/IMG-0260.jpg',
+    'https://i.postimg.cc/MnScF8Lr/IMG-2328.avif',
+    'https://i.postimg.cc/dhj7MxPM/IMG-2339.avif',
+    'https://i.postimg.cc/3kFyMcMs/IMG-2361.avif',
+    'https://i.postimg.cc/GTD2XMJf/IMG-9313.avif',
+    'https://i.postimg.cc/PPmJZRqT/IMG-9401.avif',
+    'https://i.postimg.cc/qz8qn57N/IMG-9413.avif'
+  ];
+  let currentLightbox = 0;
+
+  function openLightbox(idx) {
+    currentLightbox = idx;
+    document.getElementById('lightboxImg').src = galleryImages[idx];
+    document.getElementById('lightboxCounter').textContent = `${idx + 1} / ${galleryImages.length}`;
+    document.getElementById('lightbox').classList.add('open');
+    document.body.style.overflow = 'hidden';
+  }
+  function closeLightbox() {
+    document.getElementById('lightbox').classList.remove('open');
+    document.body.style.overflow = '';
+  }
+  function closeLightboxOutside(e) {
+    if (e.target === document.getElementById('lightbox')) closeLightbox();
+  }
+  function lightboxNav(dir) {
+    currentLightbox = (currentLightbox + dir + galleryImages.length) % galleryImages.length;
+    document.getElementById('lightboxImg').src = galleryImages[currentLightbox];
+    document.getElementById('lightboxCounter').textContent = `${currentLightbox + 1} / ${galleryImages.length}`;
+  }
+  document.addEventListener('keydown', (e) => {
+    if (!document.getElementById('lightbox').classList.contains('open')) return;
+    if (e.key === 'ArrowRight') lightboxNav(1);
+    if (e.key === 'ArrowLeft') lightboxNav(-1);
+    if (e.key === 'Escape') closeLightbox();
+  });
+
+  // ── Gallery drag-to-scroll ──
+  (function() {
+    const track = document.getElementById('galleryTrack');
+    if (!track) return;
+    let isDown = false, startX, scrollLeft, moved = false;
+
+    track.addEventListener('mousedown', (e) => {
+      isDown = true; moved = false;
+      startX = e.pageX - track.offsetLeft;
+      scrollLeft = track.scrollLeft;
+      track.style.scrollBehavior = 'auto';
+    });
+    track.addEventListener('mouseleave', () => isDown = false);
+    track.addEventListener('mouseup', () => { isDown = false; track.style.scrollBehavior = 'smooth'; });
+    track.addEventListener('mousemove', (e) => {
+      if (!isDown) return;
+      e.preventDefault();
+      moved = true;
+      const x = e.pageX - track.offsetLeft;
+      track.scrollLeft = scrollLeft - (x - startX) * 1.4;
+    });
+    // Prevent click opening lightbox if user was dragging
+    track.querySelectorAll('.gallery-item').forEach((item, idx) => {
+      item.addEventListener('click', (e) => { if (moved) e.stopImmediatePropagation(); });
+    });
+  })();
+
+  function galleryScroll(dir) {
+    const track = document.getElementById('galleryTrack');
+    track.scrollBy({ left: dir * 600, behavior: 'smooth' });
+  }
+
+
+  function renderQR() {
+    const theme = document.documentElement.getAttribute('data-theme');
+    const bg  = theme === 'light' ? 'F5F2EE' : '060606';
+    const fg  = theme === 'light' ? '007A6E' : '00E5CC';
+    const url = 'https://soundcloud.com/lanina_dj';
+    const canvas = document.getElementById('qrCanvas');
+    if (!canvas) return;
+    const ctx = canvas.getContext('2d');
+    const apiUrl = `https://api.qrserver.com/v1/create-qr-code/?size=200x200&data=${encodeURIComponent(url)}&bgcolor=${bg}&color=${fg}&format=png&margin=2`;
+    const img = new Image();
+    img.crossOrigin = 'anonymous';
+    img.onload = () => ctx.drawImage(img, 0, 0, 200, 200);
+    img.onerror = () => {
+      ctx.fillStyle = '#' + bg;
+      ctx.fillRect(0, 0, 200, 200);
+      ctx.fillStyle = '#' + fg;
+      ctx.font = '9px monospace';
+      ctx.fillText('soundcloud.com/lanina_dj', 8, 100);
+    };
+    img.src = apiUrl;
+  }
+  renderQR();
+
+  function downloadQR() {
+    const canvas = document.getElementById('qrCanvas');
+    const link = document.createElement('a');
+    link.download = 'lanina-epk-qr.png';
+    link.href = canvas.toDataURL();
+    link.click();
+  }
+
+  // Listen for OS theme changes
+  window.matchMedia('(prefers-color-scheme: light)').addEventListener('change', (e) => {
+    if (!localStorage.getItem('lanina-theme')) {
+      const theme = e.matches ? 'light' : 'dark';
+      document.documentElement.setAttribute('data-theme', theme);
+      document.getElementById('themeToggle').textContent = theme === 'dark' ? '☀' : '☾';
+      renderQR();
+    }
+  });
+</script>
+</body>
+</html>
