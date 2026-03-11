@@ -232,13 +232,14 @@
       scroll-behavior: smooth;
       scrollbar-width: none;
       -ms-overflow-style: none;
-      padding: 0 3rem 0 3rem;
+      padding: 0 3rem;
       -webkit-overflow-scrolling: touch;
+      align-items: stretch;
     }
     .gallery-scroll-track::-webkit-scrollbar { display: none; }
     .gallery-item {
       flex: 0 0 auto;
-      height: 400px;
+      height: 420px;
       width: auto;
       overflow: hidden;
       position: relative;
@@ -247,14 +248,12 @@
     .gallery-item img {
       height: 100%;
       width: auto;
-      min-width: 300px;
+      max-width: none;
       display: block;
-      transition: transform 0.4s ease, filter 0.4s ease;
+      object-fit: cover;
+      transition: transform 0.4s ease;
       filter: none;
       pointer-events: none;
-      image-rendering: auto;
-      -webkit-backface-visibility: hidden;
-      backface-visibility: hidden;
     }
     [data-theme="light"] .gallery-item img { filter: none; }
     .gallery-item:hover img { transform: scale(1.03); }
@@ -350,7 +349,9 @@
       .bio-grid { grid-template-columns:1fr; gap:2.5rem; }
       .show-row { padding-left:1.5rem; padding-right:1.5rem; }
       .mixes-grid { grid-template-columns:1fr; }
-      .gallery-item { height: 260px; }
+      .gallery-item { height: 280px; }
+      .gallery-scroll-wrap { margin: 0 -1.5rem; }
+      .gallery-nav { padding-right: 1.5rem; }
       .qr-section { grid-template-columns:1fr; gap:2.5rem; }
       .links-grid { grid-template-columns:1fr; }
       .contact-wrap { grid-template-columns:1fr; }
@@ -436,9 +437,9 @@
   <div class="bio-grid">
     <div>
       <div class="bio-copy">
-        <p><strong>La Niña</strong> is a Taiwanese-American DJ based in New York whose passion for dance music grew from many nights spent exploring electronic shows across the city.</p>
-        <p>Her sound draws from a wide range of global influences. While her tastes continue to evolve, she gravitates toward <strong>tech-house, techno, melodic house, and melodic techno</strong>, crafting sets that blend emotion, rhythm, and edge.</p>
-        <p>Community is at the heart of La Niña's artistry. She was a contestant in Australia's renowned <strong>Your Shot DJ Competition</strong> during its first-ever US debut among 200 other NYC participants. The experience deepened her connection to New York's diverse electronic music scene, and the relationships she's built with fellow artists and fans remain central to her creative drive.</p>
+        <p><strong>La Niña</strong> is a Taiwanese-American DJ based in New York whose relationship with electronic music was shaped by exploring dance floors across New York City, Berlin, Barcelona, Madrid, and Taipei. These experiences gave her a deep, felt understanding of what a dancefloor can be and a drive to recreate that feeling every time she plays.</p>
+        <p>Her sets move between <strong>tech-house, techno, melodic house, and melodic techno</strong>, music that's physical and emotional in equal measure.</p>
+        <p>She competed in Australia's <strong>Your Shot DJ Competition</strong> during its first-ever US debut, joining 200 New York artists in the search. The connections she's built with fellow DJs, producers, and the people who just love to dance are as central to her practice as the music itself.</p>
       </div>
       <div class="genre-tags">
         <span class="genre-tag">Tech House</span>
