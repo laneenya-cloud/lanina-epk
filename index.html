@@ -194,12 +194,16 @@
     .genre-tag { font-family:'Share Tech Mono',monospace; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; padding:0.35rem 0.8rem; border:1px solid var(--cyan-dim); color:var(--cyan); }
 
     /* ── SHOWS ── */
-    .shows-list { display:flex; flex-direction:column; }
-    .show-row { display:grid; grid-template-columns:90px 1fr; align-items:center; gap:2rem; padding:1.5rem 3rem; border-bottom:1px solid var(--border); transition:background 0.15s; }
-    .show-row:hover { background:var(--surface); }
-    .show-date { font-family:'Share Tech Mono',monospace; font-size:0.6rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--pink); line-height:1.6; }
+    .shows-split { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
+    .shows-col-label { font-family:'Share Tech Mono',monospace; font-size:0.62rem; letter-spacing:0.25em; text-transform:uppercase; color:var(--cyan); margin-bottom:1.5rem; }
+    .shows-upcoming-row { display:flex; align-items:center; justify-content:space-between; gap:1.5rem; padding:1.5rem; border:1px solid var(--border2); background:var(--surface); }
     .show-name { font-family:'Bebas Neue',sans-serif; font-size:1.5rem; letter-spacing:0.04em; color:var(--heading); line-height:1; }
-    .show-loc { font-family:'Share Tech Mono',monospace; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:0.3rem; }
+    .show-loc { font-family:'Share Tech Mono',monospace; font-size:0.55rem; letter-spacing:0.12em; text-transform:uppercase; color:var(--muted); margin-top:0.35rem; }
+    .show-ticket-btn { font-family:'Share Tech Mono',monospace; font-size:0.58rem; letter-spacing:0.15em; text-transform:uppercase; color:var(--bg); background:var(--cyan); padding:0.6rem 1.2rem; text-decoration:none; white-space:nowrap; transition:opacity 0.15s; flex-shrink:0; }
+    .show-ticket-btn:hover { opacity:0.8; }
+    .shows-recent-list { display:flex; flex-direction:column; gap:1px; background:var(--border); border:1px solid var(--border); }
+    .shows-recent-row { background:var(--surface); padding:1rem 1.25rem; font-family:'Bebas Neue',sans-serif; font-size:1.3rem; letter-spacing:0.04em; color:var(--heading); transition:background 0.15s; }
+    .shows-recent-row:hover { background:var(--surface2); }
 
     /* ── MIXES ── */
     .mixes-grid { display:grid; grid-template-columns:repeat(3,1fr); gap:1px; background:var(--border); border:1px solid var(--border); }
@@ -348,6 +352,7 @@
       .section { padding:3.5rem 1.5rem; }
       .bio-grid { grid-template-columns:1fr; gap:2.5rem; }
       .show-row { padding-left:1.5rem; padding-right:1.5rem; }
+      .shows-split { grid-template-columns: 1fr; gap: 2.5rem; }
       .mixes-grid { grid-template-columns:1fr; }
       .gallery-item { height: 280px; }
       .gallery-scroll-wrap { margin: 0 -1.5rem; }
@@ -399,7 +404,7 @@
   <div class="hero-body">
     <div class="hero-kicker">Electronic Press Kit</div>
     <h1 class="hero-name">LA<br><span>NIÑA</span></h1>
-    <p class="hero-tagline">Tech-house, techno, melodic house and techno DJ shaped by NYC's electronic music scene.</p>
+    <p class="hero-tagline">Taiwanese-American DJ based in New York, blending hypnotic groove with late-night momentum.</p>
     <div class="hero-actions">
       <a href="#contact" class="btn btn-primary">Book La Niña</a>
       <a href="https://soundcloud.com/lanina_dj" target="_blank" class="btn btn-ghost">Listen on SoundCloud</a>
@@ -437,9 +442,9 @@
   <div class="bio-grid">
     <div>
       <div class="bio-copy">
-        <p><strong>La Niña</strong> is a Taiwanese-American DJ based in New York whose relationship with electronic music was shaped by exploring dance floors across New York City, Berlin, Barcelona, Madrid, and Taipei. These experiences gave her a deep, felt understanding of what a dancefloor can be and a drive to recreate that feeling every time she plays.</p>
-        <p>Her sets move between <strong>tech-house, techno, melodic house, and melodic techno</strong>, music that's physical and emotional in equal measure.</p>
-        <p>She competed in Australia's <strong>Your Shot DJ Competition</strong> during its first-ever US debut, joining 200 New York artists in the search. Community sits at the heart of how she approaches music. The relationships she has built with fellow DJs, producers, and dancers across New York and beyond are what drive her growth as an artist and keep her connected to why she started playing in the first place.</p>
+        <p><strong>La Niña</strong> is a Taiwanese-American DJ based in New York whose sound was born on dance floors across New York City, Berlin, Barcelona, Madrid, and Taipei. That global influence is reflected in sets that are both high-impact and emotionally tuned, blending tech-house, techno, melodic house, and melodic techno into a sound built for movement and connection.</p>
+        <p>Following a breakout run through the NYC circuit, with standout sets at Elsewhere, 00:00, Delirium, and Ardent Noir Haus, La Niña has quickly established herself as a DJ with raw energy behind the decks and a signature sound shaped by the global language of electronic music.</p>
+        <p>Community sits at the heart of how she approaches music. The relationships she has built with fellow DJs, producers, and dancers across New York and beyond are what drive her growth as an artist and keep her connected to why she started playing in the first place.</p>
       </div>
       <div class="genre-tags">
         <span class="genre-tag">Tech House</span>
@@ -455,39 +460,38 @@
         <div class="bio-row"><div class="bio-row-key">Set Formats</div><div class="bio-row-val">60 min · 90 min · Open-to-Close</div></div>
         <div class="bio-row"><div class="bio-row-key">Available For</div><div class="bio-row-val">Clubs · Festivals · Pool Parties · Residencies · Brand Events</div></div>
       </div>
-      <div class="award-pill">
-        <div class="award-pill-label">Featured Events</div>
-        <div class="award-event">
-          <div class="award-event-title">LYRA — Magic Hour Rooftop</div>
-          <div class="award-event-sub">New York City · April 2026</div>
-        </div>
-        <div class="award-event">
-          <div class="award-event-title">DELIRIUM</div>
-          <div class="award-event-sub">New York City · January 2026</div>
-        </div>
-        <div class="award-event">
-          <div class="award-event-title">Your Shot DJ Competition</div>
-          <div class="award-event-sub">Your Shot USA · NYC · November 2025</div>
-        </div>
-      </div>
     </div>
   </div>
 </section>
 
 <!-- SHOWS -->
-<section class="section" id="shows" style="padding-left:0;padding-right:0;">
-  <div style="padding:0 3rem;">
-    <div class="sec-label">// 02 — Live Events</div>
-    <h2 class="sec-heading">Shows</h2>
-    <div class="sec-rule"></div>
-  </div>
-  <div class="shows-list">
-    <div class="show-row"><div class="show-date">04.04<br>2026</div><div><div class="show-name">LYRA — Magic Hour Rooftop</div><div class="show-loc">New York City</div></div></div>
-    <div class="show-row"><div class="show-date">02.07<br>2026</div><div><div class="show-name">ARDENT</div><div class="show-loc">New York City</div></div></div>
-    <div class="show-row"><div class="show-date">01.22<br>2026</div><div><div class="show-name">DELIRIUM</div><div class="show-loc">New York City</div></div></div>
-    <div class="show-row"><div class="show-date">12.12<br>2025</div><div><div class="show-name">ARDENT — Noir Haus</div><div class="show-loc">New York City</div></div></div>
-    <div class="show-row"><div class="show-date">11.23<br>2025</div><div><div class="show-name">Your Shot USA NYC</div><div class="show-loc">New York City</div></div></div>
-    <div class="show-row"><div class="show-date">09.27<br>2025</div><div><div class="show-name">ARDENT — Noir Haus</div><div class="show-loc">New York City</div></div></div>
+<section class="section" id="shows">
+  <div class="sec-label">// 02 — Live Events</div>
+  <h2 class="sec-heading">Shows</h2>
+  <div class="sec-rule"></div>
+  <div class="shows-split">
+
+    <div class="shows-col">
+      <div class="shows-col-label">Upcoming</div>
+      <div class="shows-upcoming-row">
+        <div class="shows-upcoming-info">
+          <div class="show-name">LYRA — Magic Hour Rooftop</div>
+          <div class="show-loc">New York City · April 4, 2026</div>
+        </div>
+        <a href="https://posh.vip/e/lyra-rooftop-party-040426?t=nina-g" target="_blank" class="show-ticket-btn">Tickets →</a>
+      </div>
+    </div>
+
+    <div class="shows-col">
+      <div class="shows-col-label">Recent</div>
+      <div class="shows-recent-list">
+        <div class="shows-recent-row">Elsewhere</div>
+        <div class="shows-recent-row">00:00 (Midnight)</div>
+        <div class="shows-recent-row">Delirium</div>
+        <div class="shows-recent-row">Ardent Noir Haus</div>
+      </div>
+    </div>
+
   </div>
 </section>
 
@@ -531,27 +535,27 @@
   <div class="sec-rule"></div>
   <div class="gallery-scroll-wrap" id="galleryWrap">
     <div class="gallery-scroll-track" id="galleryTrack">
-      <div class="gallery-item" onclick="openLightbox(0)"><img src="https://i.imgur.com/0RIh90P.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(1)"><img src="https://i.imgur.com/LCwwTP6.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(2)"><img src="https://i.imgur.com/UjZHjck.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(3)"><img src="https://i.imgur.com/aCfWWty.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(4)"><img src="https://i.imgur.com/OYxDXsi.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(5)"><img src="https://i.imgur.com/sIR4Nvj.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(6)"><img src="https://i.imgur.com/UTydNvd.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(7)"><img src="https://i.imgur.com/yT7jzB2.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(8)"><img src="https://i.imgur.com/MhnMZRB.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(9)"><img src="https://i.imgur.com/TWEg4Gx.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(10)"><img src="https://i.imgur.com/1mRcsPT.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(11)"><img src="https://i.imgur.com/1zYQFEH.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(12)"><img src="https://i.imgur.com/kHzMuDJ.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(13)"><img src="https://i.imgur.com/fcGx5z9.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(14)"><img src="https://i.imgur.com/hedNtQx.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(15)"><img src="https://i.imgur.com/bbOTE9M.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(16)"><img src="https://i.imgur.com/LikLG07.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(17)"><img src="https://i.imgur.com/3RWajZY.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(0)"><img src="https://i.imgur.com/MhnMZRB.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(1)"><img src="https://i.imgur.com/3RWajZY.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(2)"><img src="https://i.imgur.com/LCwwTP6.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(3)"><img src="https://i.imgur.com/zVWmrtj.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(4)"><img src="https://i.imgur.com/sIR4Nvj.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(5)"><img src="https://i.imgur.com/1zYQFEH.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(6)"><img src="https://i.imgur.com/OYxDXsi.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(7)"><img src="https://i.imgur.com/bbOTE9M.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(8)"><img src="https://i.imgur.com/UjZHjck.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(9)"><img src="https://i.imgur.com/vrsBhbm.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(10)"><img src="https://i.imgur.com/kHzMuDJ.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(11)"><img src="https://i.imgur.com/TWEg4Gx.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(12)"><img src="https://i.imgur.com/aCfWWty.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(13)"><img src="https://i.imgur.com/LikLG07.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(14)"><img src="https://i.imgur.com/0RIh90P.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(15)"><img src="https://i.imgur.com/fcGx5z9.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(16)"><img src="https://i.imgur.com/yT7jzB2.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(17)"><img src="https://i.imgur.com/hedNtQx.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
       <div class="gallery-item" onclick="openLightbox(18)"><img src="https://i.imgur.com/Z1IJ4Mt.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(19)"><img src="https://i.imgur.com/vrsBhbm.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
-      <div class="gallery-item" onclick="openLightbox(20)"><img src="https://i.imgur.com/zVWmrtj.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(19)"><img src="https://i.imgur.com/UTydNvd.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
+      <div class="gallery-item" onclick="openLightbox(20)"><img src="https://i.imgur.com/1mRcsPT.jpeg" alt="La Niña live" loading="lazy"/><div class="gallery-item-overlay"></div></div>
     </div>
   </div>
   <div class="gallery-nav">
@@ -675,27 +679,27 @@
 
   // ── Lightbox ──
   const galleryImages = [
-    'https://i.imgur.com/0RIh90P.jpeg',
-    'https://i.imgur.com/LCwwTP6.jpeg',
-    'https://i.imgur.com/UjZHjck.jpeg',
-    'https://i.imgur.com/aCfWWty.jpeg',
-    'https://i.imgur.com/OYxDXsi.jpeg',
-    'https://i.imgur.com/sIR4Nvj.jpeg',
-    'https://i.imgur.com/UTydNvd.jpeg',
-    'https://i.imgur.com/yT7jzB2.jpeg',
     'https://i.imgur.com/MhnMZRB.jpeg',
-    'https://i.imgur.com/TWEg4Gx.jpeg',
-    'https://i.imgur.com/1mRcsPT.jpeg',
-    'https://i.imgur.com/1zYQFEH.jpeg',
-    'https://i.imgur.com/kHzMuDJ.jpeg',
-    'https://i.imgur.com/fcGx5z9.jpeg',
-    'https://i.imgur.com/hedNtQx.jpeg',
-    'https://i.imgur.com/bbOTE9M.jpeg',
-    'https://i.imgur.com/LikLG07.jpeg',
     'https://i.imgur.com/3RWajZY.jpeg',
-    'https://i.imgur.com/Z1IJ4Mt.jpeg',
+    'https://i.imgur.com/LCwwTP6.jpeg',
+    'https://i.imgur.com/zVWmrtj.jpeg',
+    'https://i.imgur.com/sIR4Nvj.jpeg',
+    'https://i.imgur.com/1zYQFEH.jpeg',
+    'https://i.imgur.com/OYxDXsi.jpeg',
+    'https://i.imgur.com/bbOTE9M.jpeg',
+    'https://i.imgur.com/UjZHjck.jpeg',
     'https://i.imgur.com/vrsBhbm.jpeg',
-    'https://i.imgur.com/zVWmrtj.jpeg'
+    'https://i.imgur.com/kHzMuDJ.jpeg',
+    'https://i.imgur.com/TWEg4Gx.jpeg',
+    'https://i.imgur.com/aCfWWty.jpeg',
+    'https://i.imgur.com/LikLG07.jpeg',
+    'https://i.imgur.com/0RIh90P.jpeg',
+    'https://i.imgur.com/fcGx5z9.jpeg',
+    'https://i.imgur.com/yT7jzB2.jpeg',
+    'https://i.imgur.com/hedNtQx.jpeg',
+    'https://i.imgur.com/Z1IJ4Mt.jpeg',
+    'https://i.imgur.com/UTydNvd.jpeg',
+    'https://i.imgur.com/1mRcsPT.jpeg'
   ];
   let currentLightbox = 0;
 
